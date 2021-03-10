@@ -1,0 +1,26 @@
+name: Deploy to heroku
+
+on: workflow_dispatch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Deploy
+        env:
+          HEROKU_EMAIL: ${{ secrets.HEROKU_EMAIL }}
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+          REGION: ${{ secrets.REGION }}
+          HEROKU_APP: ${{ secrets.HEROKU_APP }}
+          SA_ZIP: ${{ secrets.SA_ZIP }}
+          GH_REPO: ${{ secrets.GH_REPO }}
+          GH_USER: ${{ secrets.GH_USER}}
+          GH_AUTH_TOKEN: ${{ secrets.GH_AUTH_TOKEN }}
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+          AUTH_CHATS: ${{ secrets.AUTH_CHATS }}
+          HTTP_USER: ${{ secrets.HTTP_USER }}
+          HTTP_PASS: ${{ secrets.HTTP_PASS }}
+        run: |
+          cd heroku
+          bash deploy.sh 

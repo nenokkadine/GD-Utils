@@ -1,0 +1,25 @@
+#!/usr/bin/env node
+
+const { argv } = require('yargs')
+  .usage('Usage: ./$0 <directory ID> [options]')
+  .example('./$0 1ULY8ISgWSOVc0UrzejykVgXfVL_I4r75', 'Obtain all file information in https://drive.google.com/drive/folders/1ULY8ISgWSOVc0UrzejykVgXfVL_I4r75, and save the md5 value and ID of each file in the local database')
+  .example('./$0 1ULY8ISgWSOVc0UrzejykVgXfVL_I4r75 -s 10mb', 'Obtain all file information in the specified directory, and save the md5 value and ID of files not less than 10MB in the local database')
+  .alias('s', 'size')
+  .describe('s', 'Do not fill in the md5 records of all files stored by default. If this value is set, files smaller than this size will be filtered out, and must end with b, such as 10mb')
+  .alias('u', 'update')
+  .describe('u', 'Force to get information online (ignoring whether there is a local cache)')
+  .alias('N', 'not_teamdrive')
+  .describe('N', 'If it is not a team disk link, you can add this parameter to improve interface query efficiency and reduce latency')
+  .alias('S', 'service_account')
+  .describe('S', 'Use service account to obtain file information, provided that the SA json file must be placed in the ./sa directory')
+  .help('h')
+  .alias('h', 'help')
+
+const { save_md5, validate_fid } = require('./src/gd')
+const [fid] = argv._
+if (validate_fid(fid)) {
+  const { update, size, not_teamdrive, service_account } = argv
+  save_md5({fid, size, not_teamdrive, update, service_account}).catch(console.error)
+} else {
+  console.warn('Directory ID is missing or incorrectly formatted')
+}

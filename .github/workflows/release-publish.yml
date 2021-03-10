@@ -1,0 +1,37 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  Builds:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Get the version
+        id: get_version
+        run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
+      - uses: actions/checkout@v2
+      - run: docker build . -f builder/Dockerfile -t builder:latest
+      - run: docker run --name=gdutils --rm -dit builder:latest bash
+      - run: docker cp gdutils:/builder/ ./
+      - name: Compress Build Outputs
+        run: |
+          cd builder
+          mkdir build
+          tar --exclude='./build' -czf build/gdutils.tar.gz .
+      - uses: actions/upload-artifact@v2
+        with:
+          name: Build Location
+          path: builder/build/gdutils.tar.gz
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          name: GD-Utils Build ${{ steps.get_version.outputs.VERSION }}
+          files: |
+            builder/build/gdutils.tar.gz
