@@ -98,9 +98,9 @@
 | GH_USER | Github Username | Nenokkadine | False** | Github username Where SA are uploaded |
 | GH_AUTH_TOKEN | Github Auth Token | xxxxxxxxxxxxxx | False** | Get this from [Github](https://github.com/settings/tokens/new) With Scopes `repo` |
 | BOT_TOKEN | Telegram Bot Token | 123456:abcdef | True | Get this from [Telegram](https://t.me/botfather) |
-| AUTH_CHATS | Authorized Chats | 'UserA','UserB' | True | Telegram Username's Should be Given and Should be in Single Quotes |
-| HTTP_USER | Username | user | False | HTTP Basic auth adds an Extra Layer security for you app (recommended) |
-| HTTP_PASS | Password | pass | False | HTTP Basic auth adds an Extra Layer security for you app (recommended) |
+| AUTH_CHATS | Authorized Chats | 'UserA','UserB' | True | Telegram Username's/User ID's Should be Given and Should be in Single Quotes |
+| HTTP_USER | Username | user | False | HTTP Basic auth adds an Extra Layer security for your app (recommended) |
+| HTTP_PASS | Password | pass | False | HTTP Basic auth adds an Extra Layer security for your app (recommended) |
 
 ### How to make the App Never Sleep?
 1. Setup a [CronJob](https://console.cron-job.org) to Make the heroku app never sleep
