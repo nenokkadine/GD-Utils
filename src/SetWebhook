@@ -1,0 +1,7 @@
+#!/bin/bash
+
+if [[ -n "$HTTP_USER" && -n "$HTTP_PASS" ]]; then
+	curl -F "url=https://${HTTP_USER}:${HTTP_PASS}@${APP_NAME}.herokuapp.com/gutils/api/gdurl/tgbot" "https://api.telegram.org/bot${BOT_TOKEN}/setWebhook"
+else
+	curl -F "url=https://${APP_NAME}.herokuapp.com/gutils/api/gdurl/tgbot" "https://api.telegram.org/bot${BOT_TOKEN}/setWebhook"
+fi
