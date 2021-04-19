@@ -3,7 +3,7 @@ wget -q https://github.com/nenokkadine/gdutils/releases/latest/download/gdutils.
 chmod a+x copy count dedupe md5
 mkdir /out
 wget -q https://github.com/nenokkadine/GD-Utils/raw/master/src/gdutils -O /usr/bin/gdutils && chmod a+x /usr/bin/gdutils
-wget -q https://github.com/nenokkadine/GD-Utils/raw/master/src/gdutils -O /usr/bin/SetWebhook && chmod a+x /usr/bin/SetWebhook && SetWebhook
+wget -q https://github.com/nenokkadine/GD-Utils/raw/master/src/SetWebhook -O /usr/bin/SetWebhook && chmod a+x /usr/bin/SetWebhook && SetWebhook
 #Caddy
 wget -q https://github.com/caddyserver/caddy/releases/download/v2.3.0/caddy_2.3.0_linux_amd64.tar.gz -O cad.tar.gz && tar xzf cad.tar.gz && rm -rf cad.tar.gz && chmod a+x caddy && mv caddy /usr/bin/caddy
 #Service Accounts
