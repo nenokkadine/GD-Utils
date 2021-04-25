@@ -42,17 +42,15 @@
    
    ![Terminal](assets/terminal.png)
 
-7. Now Copy paste the Below Line's and Paste it there and press enter
+7. Setting WebHook for Bot Mode
  
-    🔷 if You had given HTTP Basic Auth Vars then Use the Below One
+    🔷 By Default Script will set the Webhook
+
+    🔷 if the Bot didn't respond Just type `SetWebhook`
 
     ```
-    > curl -F "url=https://${HTTP_USER}:${HTTP_PASS}@${APP_NAME}.herokuapp.com/gutils/api/gdurl/tgbot" "https://api.telegram.org/bot${BOT_TOKEN}/setWebhook"
-    ```
-    🔷 Else Use the Below One
-
-    ```
-    > curl -F "url=https://${APP_NAME}.herokuapp.com/gutils/api/gdurl/tgbot" "https://api.telegram.org/bot${BOT_TOKEN}/setWebhook"
+    > bash-4.4$ SetWebhook
+    {"ok":true,"result":true,"description":"Webhook is already set"}
     ```
 8. Done You Bot is Now Live and You can use the terminal Even if you want and Can generate Snap2HTML and Tree
    
@@ -119,10 +117,16 @@
 
 2. Use [Kaffeine](https://kaffeine.herokuapp.com/) and Just give the app name, App's With Basic HTTP Auth enabled Might not work here
 
+### Note 
+
+* No Need to redeploy if new changes are made to src folder, it will built and your apps will fetch the latest release
+
+* if Docker Base image is updated then you should redeploy (Not gonna happen Soon).
+ 
 ### Credits
 👏 [iwestlin](https://github.com/iwestlin) - The original Developer of this tool
 
-👏 [Roshan](https://github.com/roshanconner123) - Translated Entire repo into English and the bash Script
+👏 [Roshan](https://github.com/roshanconnor123) - Translated Entire repo into English and the bash Script
 
 👏 [Shuanglei Tao](https://github.com/tsl0922) - Developer of TTYD (Terminal over Web)
 
