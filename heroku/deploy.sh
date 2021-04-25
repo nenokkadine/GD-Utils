@@ -115,7 +115,6 @@ if [[ -n "$APP_SUC" ]]; then
 	#Config File
 	if [[ -n "$BOT_TOKEN" && -n "$AUTH_CHATS" ]]; then
 		heroku config:set -a "$HEROKU_APP" BOT_TOKEN="$BOT_TOKEN" AUTH_CHATS="$AUTH_CHATS" APP_NAME="$HEROKU_APP"
-		heroku ps:scale web=1 -a "$HEROKU_APP"
 	else
 		echo "Bot Token, Auth Chats not Provided Exiting , For Info Read Readme"
 		exit 2
