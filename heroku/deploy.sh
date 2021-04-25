@@ -109,7 +109,7 @@ if [[ -n "$APP_SUC" ]]; then
 	if [[ -n "$HTTP_USER" && -n "$HTTP_PASS" ]]; then
 		heroku config:set -a "$HEROKU_APP" HTTP_USER="$HTTP_USER" HTTP_PASS="$HTTP_PASS"
 	else
-		echo "No AUTH Variables provided, HTTP Basic Auth Disabled"
+		echo "WARNING : No AUTH Variables provided, HTTP Basic Auth Disabled"
 	fi
 	
 	#Config File
@@ -120,6 +120,13 @@ if [[ -n "$APP_SUC" ]]; then
 		echo "Bot Token, Auth Chats not Provided Exiting , For Info Read Readme"
 		exit 2
 	fi
+
+	if [[ -n "$DEFAULT_DEST" ]]; then
+		heroku config:set -a "$HEROKU_APP" DEFAULT_DEST="$DEFAULT_DEST"
+	else
+		echo "WARNING : Default Destination Folder ID Not Provided"
+	fi
+	heroku ps:scale web=1 -a "$HEROKU_APP"
 	echo "Deployment Completed"
 else
 	echo "App Deployment Failed"

@@ -99,6 +99,7 @@
 | AUTH_CHATS | Authorized Chats | 'UserA','UserB' | True | Telegram Username's/User ID's Should be Given and Should be in Single Quotes |
 | HTTP_USER | Username | user | False | HTTP Basic auth adds an Extra Layer security for your app (recommended) |
 | HTTP_PASS | Password | pass | False | HTTP Basic auth adds an Extra Layer security for your app (recommended) |
+| DEFAULT_DEST | Folder ID | 0ADXXXXXXXMUk9PVA | False | Default Destination G-Drive folder ID (TeamDrive ID Recommended) |
 
 ### How to make the App Never Sleep?
 1. Setup a [CronJob](https://console.cron-job.org) to Make the heroku app never sleep

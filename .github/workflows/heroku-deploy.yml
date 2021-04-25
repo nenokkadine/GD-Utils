@@ -21,6 +21,7 @@ jobs:
           AUTH_CHATS: ${{ secrets.AUTH_CHATS }}
           HTTP_USER: ${{ secrets.HTTP_USER }}
           HTTP_PASS: ${{ secrets.HTTP_PASS }}
+          DEFAULT_DEST: ${{ secrets.DEFAULT_DEST }}
         run: |
           cd heroku
           bash deploy.sh 

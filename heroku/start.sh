@@ -20,15 +20,15 @@ elif [[ -n $SA_ZIP ]]; then
 	rm -rf accounts
 else
 	echo "Neither Service Accounts Nor Token Provided. Exiting..."
-	exit 0
+	exit 1
 fi
 
 # Config
 if [[ -n "$BOT_TOKEN" && -n "$AUTH_CHATS" ]]; then
-	wget -qO- https://gist.github.com/nenokkadine/433284483b9df4e73dfcb90d4310bd65/raw/9d743d207020cc88ef5c72caa0cc2a9c5c2a27af/config.js | sed -e "s/\$BOT_TOKEN/$BOT_TOKEN/g" -e "s/\$AUTH_CHATS/$AUTH_CHATS/g" > config.js
+	wget -qO- https://gist.github.com/nenokkadine/433284483b9df4e73dfcb90d4310bd65/raw/61775f835e216f992ed25ec71ab9d2310522caef/config.js | sed -e "s/\$BOT_TOKEN/$BOT_TOKEN/g" -e "s/\$AUTH_CHATS/$AUTH_CHATS/g" -e "s/\$DEFAULT_DEST/$DEFAULT_DEST/g"  > config.js
 else
 	echo "Bot Token, Auth Chats not Provided Exiting , For Info Read Readme"
-	exit 0
+	exit 1
 fi
 #Start GDutils Server
 node server.js &
