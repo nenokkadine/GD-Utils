@@ -11,5 +11,5 @@ RUN apk update && \
                                 unzip \
                                 xz \
                                 bash && \
-    mkdir /gdutils
+    mkdir /gdutils && chmod 777 /gdutils
 WORKDIR /gdutils

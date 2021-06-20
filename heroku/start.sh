@@ -35,9 +35,9 @@ node server.js &
 
 # HTTPS Auth
 if [[ -n "$HTTP_USER" && -n "$HTTP_PASS" ]]; then
-	wget -qO- https://gist.github.com/nenokkadine/5db0fff9216fcedc0dd5862d0a5ab864/raw/95cabcaaf776e47ebb1990b2583f443171cf742a/caddyauth | sed -e "s/\$HTTP_USER/$HTTP_USER/g" -e "s/\$HASHPASS/$(caddy hash-password --plaintext $HTTP_PASS)/g" > /Caddyfile
+	wget -qO- https://gist.github.com/nenokkadine/5db0fff9216fcedc0dd5862d0a5ab864/raw/4dd7e7b8edb691fc77a78cc174e88baab4ff073c/caddyauth | sed -e "s/\$HTTP_USER/$HTTP_USER/g" -e "s/\$HASHPASS/$(caddy hash-password --plaintext $HTTP_PASS)/g" > /Caddyfile
 else
-	wget -q https://gist.github.com/nenokkadine/5db0fff9216fcedc0dd5862d0a5ab864/raw/95cabcaaf776e47ebb1990b2583f443171cf742a/caddynoauth -O /Caddyfile
+	wget -q https://gist.github.com/nenokkadine/5db0fff9216fcedc0dd5862d0a5ab864/raw/4dd7e7b8edb691fc77a78cc174e88baab4ff073c/caddynoauth -O /Caddyfile
 fi
 
 #Terminal over Web
