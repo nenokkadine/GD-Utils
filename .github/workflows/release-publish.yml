@@ -3,10 +3,13 @@ name: Release
 on:
   push:
     tags:
-      - "v*"
+      - "v*.*.*"
+
+env:
+  IMAGE: ghcr.io/nenokkadine/gdutils
 
 jobs:
-  Builds:
+  ReleaseAssets:
     runs-on: ubuntu-latest
 
     steps:
@@ -14,9 +17,12 @@ jobs:
         id: get_version
         run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
       - uses: actions/checkout@v2
-      - run: docker build . -f builder/Dockerfile -t builder:latest
-      - run: docker run --name=gdutils --rm -dit builder:latest bash
-      - run: docker cp gdutils:/builder/ ./
+      - name: Docker Build
+        run: docker build . -f builder/Dockerfile -t builder:latest
+      - name: Run the Docker image
+        run: docker run --name=gdutils --rm -dit builder:latest bash
+      - name: Copy Built files
+        run: docker cp gdutils:/builder/ ./
       - name: Compress Build Outputs
         run: |
           cd builder
@@ -35,3 +41,18 @@ jobs:
           name: GD-Utils Build ${{ steps.get_version.outputs.VERSION }}
           files: |
             builder/build/gdutils.tar.gz
+  DockerImage:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Login to ghcr.io
+        run: docker login https://ghcr.io -u token -p ${{ secrets.GH_TOKEN }}
+        
+      - name: Build and Push image
+        run: |
+          VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
+          [[ "${{ github.ref }}" == "refs/tags/"* ]] && VERSION=$(echo $VERSION | sed -e 's/^v//')
+          echo VERSION=$VERSION
+          docker build . -f baseimage/Dockerfile -t ${{ env.IMAGE }}:$VERSION
+          docker tag ${{ env.IMAGE }}:$VERSION ${{ env.IMAGE }}:latest
+          echo "Pushing"
+          docker push --all-tags ${{ env.IMAGE }}

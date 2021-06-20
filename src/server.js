@@ -2,6 +2,7 @@ const dayjs = require('dayjs')
 const Koa = require('koa')
 const bodyParser = require('koa-bodyparser')
 const router = require('./src/router')
+var fs = require('fs');
 
 const app = new Koa()
 app.proxy = true
@@ -11,8 +12,13 @@ app.use(bodyParser())
 app.use(router.routes())
 app.use(router.allowedMethods())
 
-const PRT = 23333
-app.listen(PRT, '0.0.0.0', console.log('http://127.0.0.1:' + PRT))
+const G_SOCK = "/usr/gdutils.sock"
+
+if (fs.existsSync(G_SOCK)) {
+  fs.unlinkSync(G_SOCK)
+}
+
+app.listen(G_SOCK, '0.0.0.0')
 
 async function catcher (ctx, next) {
   try {
