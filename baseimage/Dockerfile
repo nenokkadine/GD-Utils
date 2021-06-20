@@ -10,8 +10,6 @@ RUN apk update && \
                                 tar \
                                 unzip \
                                 xz \
-                                neofetch \
-                                htop \
                                 bash && \
-    mkdir /gdutils
+    mkdir /gdutils && chmod 777 /gdutils
 WORKDIR /gdutils
