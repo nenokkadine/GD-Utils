@@ -52,7 +52,8 @@ jobs:
           VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
           [[ "${{ github.ref }}" == "refs/tags/"* ]] && VERSION=$(echo $VERSION | sed -e 's/^v//')
           echo VERSION=$VERSION
-          docker build -t ${{ env.IMAGE }}:$VERSION -f baseimage/Dockerfile .
+          cd baseimage
+          docker build . -t ${{ env.IMAGE }}:$VERSION
           docker tag ${{ env.IMAGE }}:$VERSION ${{ env.IMAGE }}:latest
           echo "Pushing"
           docker push --all-tags ${{ env.IMAGE }}
